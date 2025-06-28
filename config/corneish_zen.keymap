@@ -51,6 +51,13 @@
             bindings = <&kp P &kp W &kp UNDER &kp N3>;
             label = "PW_3";
         };
+
+        pw_4: pw_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N4>;
+            label = "PW_4";
+        };
     };
 
     keymap {
@@ -77,14 +84,14 @@
             label = "NUMBER";
 
             // -----------------------------------------------------------------------------------------
-            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   |     |      |       |       |     |      |
-            // |      | F1  | F2  | F3  | F4  | F5  |   |     | LFT  | DWN   |  UP   | RGT |      |
-            // |      | F6  | F7  | F8  | F9  | F10 |   |     | HOME | PG_DN | PG_UP | END |      |
-            //                    |     |     |     |   |     |      |       |
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | Vol+ | DDa  | &pw_1 | &pw_4 | &pw_3 | &pw_4 |
+            // |      | F1  | F2  | F3  | F4  | F5  |   | Mute | LFT  | DWN   |  UP   | RGT   |       |
+            // |      | F6  | F7  | F8  | F9  | F10 |   | Vol- | HOME | PG_DN | PG_UP | END   |       |
+            //                    |     |     |     |   |      |      |       |
 
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp C_VOLUME_UP  &Dda      &pw_1      &pw_2      &pw_3      &trans
-&trans      &kp F1        &kp F2        &kp F3        &kp F4        &kp F5          &kp K_MUTE       &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &trans
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp C_VOLUME_UP  &Dda      &pw_1      &pw_2      &pw_3      &pw_4
+&trans      &kp F1        &kp F2        &kp F3        &kp F4        &kp F5          &kp K_MUTE       &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &kp LG(LS(SEMI))
 &trans      &kp F6        &kp F7        &kp F8        &kp F9        &kp F10         &kp C_VOL_DN     &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &trans
                                         &trans        &trans        &trans          &trans           &trans    &trans
             >;        };
