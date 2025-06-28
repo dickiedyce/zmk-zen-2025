@@ -10,6 +10,49 @@
 };
 
 / {
+    behaviors {
+        gqt: global-quick-tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GLOBAL_QUICK_TAP";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    macros {
+        Dda: Dda {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp D &kp D &kp A &kp SPACE>;
+            label = "DDA";
+        };
+
+        pw_1: pw_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N1>;
+            label = "PW_1";
+        };
+
+        pw_2: pw_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N2>;
+            label = "PW_2";
+        };
+
+        pw_3: pw_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N3>;
+            label = "PW_3";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
