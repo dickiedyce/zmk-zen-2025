@@ -10,51 +10,102 @@
 };
 
 / {
+    behaviors {
+        gqt: global-quick-tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GLOBAL_QUICK_TAP";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    macros {
+        Dda: Dda {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp D &kp D &kp A &kp SPACE>;
+            label = "DDA";
+        };
+
+        pw_1: pw_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N1>;
+            label = "PW_1";
+        };
+
+        pw_2: pw_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N2>;
+            label = "PW_2";
+        };
+
+        pw_3: pw_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp P &kp W &kp UNDER &kp N3>;
+            label = "PW_3";
+        };
+    };
+
+    // combos {
+    //     compatible = "zmk,combos";
+
+    //     Copy {
+    //         bindings = <&kp LG(C)>;
+    //         key-positions = <14 15>;
+    //     };
+
+    //     Paste {
+    //         bindings = <&kp LG(V)>;
+    //         key-positions = <15 16>;
+    //     };
+
+    //     Cut {
+    //         bindings = <&kp LG(X)>;
+    //         key-positions = <13 14>;
+    //     };
+    // };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            display-name = "QWERTY";
-// --------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+            label = "QDRWB";
+
+            // -----------------------------------------------------------------------------------------
+            // | TAB  |  Q  |  D  |  R  |  W  |  B  |   |  J  |  F   |  U  |  P  |  ;  | ESC   |
+            // | BSPC |  A  |  S  |  H  |  T  |  G  |   |  Y  |  N   |  E  |  O  |  I  |  '    |
+            // | SHFT |  Z  |  X  |  M  |  C  |  V  |   |  K  |  L   |  ,  |  .  |  /  | CTRL  |
+            //                    | ALT | GUI | SPC |   | ENT | LWR  |  ~  |
+
             bindings = <
-&kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-&kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-&kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-               &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
+&gqt LS(TAB) TAB  &kp Q        &gqt LC(LA(LG(LS(D)))) D  &gqt LC(LA(LG(LS(R)))) R  &gqt LC(LA(LG(LS(W)))) W  &gqt PIPE B                 &gqt BSLH J  &gqt EQUAL F  &gqt MINUS U         &gqt PLUS P  &gqt COLON SEMI  &kp ESC
+&gqt DEL BSPC     &gqt N1 A    &gqt N2 S                 &gqt N3 H                 &gqt N4 T                 &gqt N5 G                   &gqt N6 Y    &gqt N7 N     &gqt N8 E            &gqt N9 O    &gqt N0 I        &gqt GRAVE SQT
+&kp LSHFT         &gqt LBKT Z  &gqt RBKT X               &gqt LPAR M               &gqt RPAR C               &gqt LC(LA(LG(LS(N)))) V    &gqt LBRC K  &gqt RBRC L   &gqt LT COMMA        &gqt GT DOT  &gqt QMARK FSLH  &kp RCTRL
+                                                         &kp RALT                  &kp LGUI                  &lt 1 SPACE                 &kp RET      &mo 1         &gqt LG(SEMI) TILDE
             >;
         };
 
         lower_layer {
-            display-name = "NUMBER";
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |Studio|
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-            bindings = <
-&kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-&bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &studio_unlock
-&kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                     &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-            >;
-        };
+            label = "NUMBER";
 
-        raise_layer {
-            display-name = "SYMBOL";
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+            // -----------------------------------------------------------------------------------------
+            // | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   |     |      |       |       |     |      |
+            // |      | F1  | F2  | F3  | F4  | F5  |   |     | LFT  | DWN   |  UP   | RGT |      |
+            // |      | F6  | F7  | F8  | F9  | F10 |   |     | HOME | PG_DN | PG_UP | END |      |
+            //                    |     |     |     |   |     |      |       |
+
             bindings = <
-&kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-&kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-&kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                          &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp C_VOLUME_UP  &Dda      &pw_1      &pw_2      &pw_3      &trans
+&trans      &kp F1        &kp F2        &kp F3        &kp F4        &kp F5          &kp K_MUTE       &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &trans
+&trans      &kp F6        &kp F7        &kp F8        &kp F9        &kp F10         &kp C_VOL_DN     &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &trans
+                                        &trans        &trans        &trans          &trans           &trans    &trans
             >;
         };
     };
