@@ -55,7 +55,7 @@
         pw_4: pw_4 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp P &kp W &kp UNDER &kp N4>;
+            bindings = <&kp 5 &kp 4 &kp 3 &kp 2 &kp 1 &kp LS(1) &kp S &kp H &kp T &kp LS(G)>;
             label = "PW_4";
         };
     };
